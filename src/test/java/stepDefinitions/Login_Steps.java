@@ -13,8 +13,6 @@ import pageObjects.Login_PO;
 
 public class Login_Steps extends Base_PO {
 
-    private WebDriver driver = getDriver();
-
     private Login_PO loginPo;
 
     public Login_Steps(Login_PO loginPo) {
@@ -45,19 +43,16 @@ loginPo.setPassword(password);
 
     @Then("I should be presented with a successful login message")
     public void ı_should_be_presented_with_a_successful_login_message() {
-        String login_message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_message, "validation succeeded");
+        loginPo.validate_SuccessfulLogin_Message();
     }
 
     @Then("I should be presented with a unsuccessful login message")
     public void ı_should_be_presented_with_an_unsuccessful_login_message() {
-        String login_message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_message, "validation failed");
+        loginPo.validate_UnsuccessfulLogin_Message();
     }
 
     @Then("I should be presented with the following login validation message {}")
-    public void ı_should_be_presented_with_the_following_login_validation_message(String validateMessage) {
-        String login_message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_message, validateMessage);
+    public void ı_should_be_presented_with_the_following_login_validation_message(String expectedMessage) {
+        waitForAlert_And_ValidateText(expectedMessage);
     }
 }

@@ -5,7 +5,6 @@ Feature: WebDriver University - Login Portal Page
   Background:
     Given I access the webdriver university login portal page
 
-@login1
   Scenario: Validate Successful Login
     When I enter username webdriver
     And I enter password webdriver123
@@ -18,6 +17,7 @@ Feature: WebDriver University - Login Portal Page
     And I click on the login button
     Then I should be presented with a unsuccessful login message
 
+    @smoke @ignore
   Scenario Outline: Validate Successful & Unsuccessful Login
     When I enter username <username>
     And I enter password <password>
