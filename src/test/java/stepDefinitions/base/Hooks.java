@@ -6,6 +6,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 import static driver.DriverFactory.cleanupDriver;
@@ -20,14 +22,12 @@ public class Hooks {
 
     @AfterStep
     public void captureExceptionImage(Scenario scenario) {
-        Date date = new Date();
-
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String  timeMilliseconds = Long.toString(timestamp.getTime());
         if (scenario.isFailed()) {
 
-            Long timeMilliseconds = date.getTime();
-            String time = timeMilliseconds.toString();
             byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", time);
+            scenario.attach(screenshot, "image/png", timeMilliseconds);
         }
     }
 

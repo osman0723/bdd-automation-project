@@ -17,6 +17,6 @@ Feature: WebDriver University - Contact Us Page
     When I enter a specific first name Mehmet
     And I enter a specific last name Cilgin
     And I enter a specific email address Mehmet@mail.com
-    And I enter a specific comment "How are you dear?"
+    And I enter a specific comment "How are you?"
     And I click on the submit button
     Then I should be presented with a successful contact us submission message
